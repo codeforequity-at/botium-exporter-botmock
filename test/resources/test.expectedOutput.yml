@@ -1,0 +1,237 @@
+---
+- filename: Botium Exporter Test_1.convo.txt
+  data: |
+    Botium Exporter Test_1
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "1/11":                            {"intent":{"value":"a6c26620-d71d-11ea-9667-bd14b4c93408","label":"INTENT_AUDIO"},"conditional":{"id":"g-PKCceTaBSOp4dOhVP-t-S","rules":[],"combinator":"and","not":false}}
+    Node "d99da98f-3750-48c6-8b3d-b10a2bb031df": Bot Says (text)
+    No more messages
+
+    #me
+    UTT_INTENT_AUDIO
+
+    #bot
+    Your text here
+- filename: Botium Exporter Test_2.convo.txt
+  data: |
+    Botium Exporter Test_2
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "2/11":                            {"intent":{"label":"INTENT_IMAGE","value":"d4ea81d0-d720-11ea-94c2-a1b37ffd13ef"},"conditional":{"id":"g-OzwES2O7F5Rn8JTa97-Ed","rules":[],"combinator":"and","not":false}}
+    Node "7db233d4-d715-404a-968f-046fd739066f": Image (image)
+    No more messages
+
+    #me
+    UTT_INTENT_IMAGE
+
+    #bot
+    MEDIA https://botmock.s3.amazonaws.com/1596634632.png
+- filename: Botium Exporter Test_3.convo.txt
+  data: |
+    Botium Exporter Test_3
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "3/11":                            {"intent":{"label":"INTENT_BUTTON","value":"c202fc90-d721-11ea-b3f7-d999416e5fb6"},"conditional":{"id":"g-5HzUCwkBigc9-yaDjH0Vw","rules":[],"combinator":"and","not":false}}
+    Node "7867d134-3ae8-4712-bdbe-40ab0b06ea3a": Button (button)
+    No more messages
+
+    #me
+    UTT_INTENT_BUTTON
+
+    #bot
+    BUTTONS BUTTON1|BUTTON2
+- filename: Botium Exporter Test_4.convo.txt
+  data: |
+    Botium Exporter Test_4
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "4/11":                            {"intent":{"label":"INTENT_LOCATION","value":"5d80c110-d722-11ea-b73c-3dae0d73cfb6"},"conditional":{"id":"g-ZlNLt3dvyZWfx58xd8CYf","rules":[],"combinator":"and","not":false}}
+    Node "06c9b7f5-ae4a-40f6-8cb0-d15cad45d159": Location (location)
+    Message type "location" not supported
+
+    #me
+    UTT_INTENT_LOCATION
+- filename: Botium Exporter Test_5.convo.txt
+  data: |
+    Botium Exporter Test_5
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "5/11":                            {"intent":{"label":"INTENT_WEBVIEW","value":"9b125d10-d722-11ea-ae8f-83c9c9d4ecd7"},"conditional":{"id":"g-LFUdKDVmW9vu7tFMRJ5EW","rules":[],"combinator":"and","not":false}}
+    Node "a8687213-71a9-40ed-abdc-718bbfa23588": Web View (webview)
+    Message type "webview" not supported
+
+    #me
+    UTT_INTENT_WEBVIEW
+- filename: Botium Exporter Test_6.convo.txt
+  data: |
+    Botium Exporter Test_6
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "6/11":                            {"intent":{"label":"INTENT_CAROUSEL","value":"7ece52f0-d7b8-11ea-b102-3b479547360a"},"conditional":{"id":"g-ACi9lJTfOSBPS_9nycyPd","rules":[],"combinator":"and","not":false}}
+    Node "4b53a416-6182-4128-bb07-95a06cf92e57": Carousel / Card (generic)
+    No more messages
+
+    #me
+    UTT_INTENT_CAROUSEL
+
+    #bot
+    CARDS Clothing|Accessories
+    MEDIA https://botmock.s3.amazonaws.com/1596624373.png|https://botmock.s3.amazonaws.com/1596624440.png
+    BUTTONS See this deal
+- filename: Botium Exporter Test_7.convo.txt
+  data: |
+    Botium Exporter Test_7
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "7/11":                            {"intent":{"label":"INTENT_ALTERNATIVES","value":"2f994e60-d7b9-11ea-ada9-b9b3b9cba0da"},"conditional":{"id":"g-Nhxqy3NZ1FX6PmCidkKoC","rules":[],"combinator":"and","not":false}}
+    Node "2e1a7bec-ccb0-4690-93f8-57c68b760872": Bot Says (text)
+    No more messages
+
+    #me
+    UTT_INTENT_ALTERNATIVES
+
+    #bot
+    First text
+- filename: Botium Exporter Test_8.convo.txt
+  data: |
+    Botium Exporter Test_8
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "8/11":                            {"intent":{"value":"4ba56900-d704-11ea-87da-99041222d849","label":"INTENT_LOOP"},"conditional":{"id":"g-MYpl6jsxujtLdEyqkVekQ","rules":[],"combinator":"and","not":false}}
+    Node "02222e22-25ce-4b4a-a293-7d08c0f53e8f": Button (button)
+    Connection "1/1":                            {"intent":"","conditional":false}
+    Node "4da3f21f-b828-42b0-b99a-b8f43882a8d3": User Says (user_reply)
+    Connection "1/1":                            {"intent":"","conditional":false}
+    Node "02222e22-25ce-4b4a-a293-7d08c0f53e8f": Button (button)
+    circular structure, message "02222e22-25ce-4b4a-a293-7d08c0f53e8f" is already extracted
+
+    #me
+    UTT_INTENT_LOOP
+
+    #bot
+    BUTTONS Show buttons again
+
+    #me
+    Show buttons again
+
+    #bot
+    BUTTONS Show buttons again
+- filename: Botium Exporter Test_9.convo.txt
+  data: |
+    Botium Exporter Test_9
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "9/11":                            {"intent":{"value":"1cbdcde0-d7ba-11ea-a2b3-477be15e5511","label":"INTENT_VARIABLE"},"conditional":{"id":"g-WZUtGyP3h9Ef27q0vBR8i","rules":[],"combinator":"and","not":false}}
+    Node "959dbfc0-f223-4c6a-bf9e-ec92041a31e5": Bot Says (text)
+    Connection "1/1":                            {"intent":{"label":"INTENT_PILL_TYPE","value":"6cefa920-d7bb-11ea-83f5-5b309b79b719"},"conditional":{"id":"g-P6mub0xvzcvrzBukNjUNZ","rules":[],"combinator":"and","not":false}}
+    Node "3b517bd5-0324-429c-b14b-f3fc3256ce92": Bot Says (text)
+    No more messages
+
+    #me
+    UTT_INTENT_VARIABLE
+
+    #bot
+    Red or blue pill?
+
+    #me
+    UTT_INTENT_PILL_TYPE
+
+    #bot
+    You have choosen $VARIABLE_PILL pill
+- filename: Botium Exporter Test_10_1.convo.txt
+  data: |
+    Botium Exporter Test_10_1
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "10/11":                            {"intent":{"label":"INTENT_BRANCHING_BY_BOT","value":"7d2a1620-dbc8-11ea-be54-b387dfcd8ad8"},"conditional":{"id":"g-ev9TIgdlcl-ftdHdYMncl","rules":[],"combinator":"and","not":false}}
+    Node "d6bdc304-5d25-4f6f-9471-c9d275d2d721": Bot Says (text)
+    Connection "1/2":                            {"intent":"","conditional":false}
+    Node "0e668675-004f-4705-bfbc-f48936f9a26f": Bot Says (text)
+    No more messages
+
+    #me
+    UTT_INTENT_BRANCHING_BY_BOT
+
+    #bot
+    BotMessage1
+
+    #bot
+    Botmessage 2/1
+- filename: Botium Exporter Test_10_2.convo.txt
+  data: |
+    Botium Exporter Test_10_2
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "10/11":                            {"intent":{"label":"INTENT_BRANCHING_BY_BOT","value":"7d2a1620-dbc8-11ea-be54-b387dfcd8ad8"},"conditional":{"id":"g-ev9TIgdlcl-ftdHdYMncl","rules":[],"combinator":"and","not":false}}
+    Node "d6bdc304-5d25-4f6f-9471-c9d275d2d721": Bot Says (text)
+    Connection "2/2":                            {"intent":"","conditional":false}
+    Node "6fcc6e15-8085-445c-a74d-de0ee995ba45": Bot Says (text)
+    No more messages
+
+    #me
+    UTT_INTENT_BRANCHING_BY_BOT
+
+    #bot
+    BotMessage1
+
+    #bot
+    Botmessage 2/2
+- filename: Botium Exporter Test_11.convo.txt
+  data: |
+    Botium Exporter Test_11
+    Node "c38a0990-d703-11ea-8f47-834576e545ab": Starting Point (text)
+    Connection "11/11":                            {"intent":{"label":"INTENT_TEST","value":"1c04dbd0-dd62-11ea-a88c-51816210c728"},"conditional":{"id":"g-bt8m19tMBW5DQq1sLHzv8","rules":[],"combinator":"and","not":false}}
+    Node "348bd70f-1abb-4c75-b864-1a8c5acf57ac": Bot Says (text)
+    No more messages
+
+    #me
+    UTT_INTENT_TEST
+
+    #bot
+    test
+- filename: UTT_INTENT_ALTERNATIVES.convo.txt
+  data: |-
+    UTT_INTENT_ALTERNATIVES
+    alternatives
+- filename: UTT_INTENT_AUDIO.convo.txt
+  data: |
+    UTT_INTENT_AUDIO
+    audio
+- filename: UTT_INTENT_BRANCHING_BY_BOT.convo.txt
+  data: |-
+    UTT_INTENT_BRANCHING_BY_BOT
+    branching by bot
+    branching
+- filename: UTT_INTENT_BUTTON.convo.txt
+  data: |-
+    UTT_INTENT_BUTTON
+    button
+- filename: UTT_INTENT_CAROUSEL.convo.txt
+  data: |-
+    UTT_INTENT_CAROUSEL
+    carousel
+- filename: UTT_INTENT_IMAGE.convo.txt
+  data: |-
+    UTT_INTENT_IMAGE
+    image
+    Image
+    pic
+    picture
+- filename: UTT_INTENT_LOCATION.convo.txt
+  data: |-
+    UTT_INTENT_LOCATION
+    location
+- filename: UTT_INTENT_LOOP.convo.txt
+  data: |-
+    UTT_INTENT_LOOP
+    loop
+- filename: UTT_INTENT_NOT_USED.convo.txt
+  data: |-
+    UTT_INTENT_NOT_USED
+    not used value
+- filename: UTT_INTENT_PILL_TYPE.convo.txt
+  data: |-
+    UTT_INTENT_PILL_TYPE
+    $VARIABLE_PILL
+- filename: UTT_INTENT_TEST.convo.txt
+  data: |-
+    UTT_INTENT_TEST
+    test
+- filename: UTT_INTENT_VARIABLE.convo.txt
+  data: |-
+    UTT_INTENT_VARIABLE
+    variable
+- filename: UTT_INTENT_WEBVIEW.convo.txt
+  data: |-
+    UTT_INTENT_WEBVIEW
+    webview

@@ -1,12 +1,11 @@
 import "dotenv/config";
-import {BaseExporter, Resources, FileWriter, Kind, ProjectReference} from "@botmock/export";
-import {Botmock, DataTransformation, KeyDependent} from "@botmock/export/src/types/index";
+import {BaseExporter, Botmock, DataTransformation, Resources} from "@botmock/export";
 import {BotDriver} from "botium-core"
 import {sanitize} from "sanitize-filename-ts";
 
 const SCRIPTING_FORMAT_TXT = 'SCRIPTING_FORMAT_TXT'
 const SCRIPTING_TYPE_CONVO = 'SCRIPTING_TYPE_CONVO'
-const SCRIPTING_TYPE_UTTERANCES = 'SCRIPTING_TYPE_UTTERANCES'
+// const SCRIPTING_TYPE_UTTERANCES = 'SCRIPTING_TYPE_UTTERANCES'
 
 import {Botium} from "./types";
 
@@ -314,7 +313,6 @@ export class BotiumBotmockExporter extends BaseExporter {
     #txtConvoTransformation = (
         resources: Resources,
         messages: Map<string, Botmock.Message>,
-        intents: Map<string, Botmock.Intent>,
         rootMessages: string[]
     ) => {
         const extractedConversations: ResultEntry[] = [];
@@ -374,10 +372,7 @@ export class BotiumBotmockExporter extends BaseExporter {
     };
 
     #txtUtteranceTransformation = (
-        resources: Resources,
-        messages: Map<string, Botmock.Message>,
-        intents: Map<string, Botmock.Intent>,
-        rootMessages: string[]
+        intents: Map<string, Botmock.Intent>
     ) => {
         const resultUtteranceStructList : Utterance[] = []
 
@@ -433,8 +428,8 @@ export class BotiumBotmockExporter extends BaseExporter {
         const rootMessages = (resources.board?.board?.root_messages || []) as string[];
 
         return [
-            ...this.#txtConvoTransformation(resources, messages, intents, rootMessages),
-            ...this.#txtUtteranceTransformation(resources, messages, intents, rootMessages)
+            ...this.#txtConvoTransformation(resources, messages, rootMessages),
+            ...this.#txtUtteranceTransformation(intents)
         ];
     };
 

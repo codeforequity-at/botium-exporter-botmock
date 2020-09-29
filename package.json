@@ -1,6 +1,6 @@
 {
   "name": "botium-botmock-export",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "scripts": {
     "build": "tsc",
@@ -8,7 +8,7 @@
     "test": "env mocha -r ts-node/register 'test/**/*.spec.ts'"
   },
   "dependencies": {
-    "@botmock/export": "^0.11.0",
+    "@botmock/export": "^0.18.5",
     "@types/node": "13.13.12",
     "botium-core": "^1.9.9",
     "dotenv": "8.2.0",

@@ -16,6 +16,9 @@
     "noImplicitReturns": true,
     "outDir": "dist",
     "removeComments": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
     "typeRoots": [ "./typings", "./node_modules/@types" ]
   },
   "exclude": [

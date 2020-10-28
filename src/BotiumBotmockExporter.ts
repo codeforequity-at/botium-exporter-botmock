@@ -5,7 +5,6 @@ import {sanitize} from "sanitize-filename-ts";
 
 const SCRIPTING_FORMAT_TXT = 'SCRIPTING_FORMAT_TXT'
 const SCRIPTING_TYPE_CONVO = 'SCRIPTING_TYPE_CONVO'
-// const SCRIPTING_TYPE_UTTERANCES = 'SCRIPTING_TYPE_UTTERANCES'
 
 import {Botium} from "./types";
 
@@ -68,10 +67,11 @@ export class BotiumBotmockExporter extends BaseExporter {
     }
 
     /**
-     * Replaces botmock variables in text with botium variables
+     * Replaces botmock variables in text with botium variables,
+     * if there are no variable definitions
      * @param text Text in block
      */
-    #replaceVariableCharacterInTextDeprecated = (text: string): string => {
+    #replaceVariableCharacterInTextNoVars = (text: string): string => {
         const alphanumericRegexp = new RegExp(/\%([a-zA-Z0-9_]+)\%/g);
         const matches = text.match(alphanumericRegexp);
         if (Object.is(matches, null)) {
@@ -230,7 +230,8 @@ export class BotiumBotmockExporter extends BaseExporter {
                     if (botMessages.length) {
                         botiumConvoSteps.push({
                             sender: 'bot',
-                            messageText: botMessages.map(m => this.#replaceVariableCharacterInTextDeprecated(m)).join('/n')
+                            // TODO maybe we could variable definitions here
+                            messageText: botMessages.map(m => this.#replaceVariableCharacterInTextNoVars(m)).join('/n')
                         })
                     }
                     break;
@@ -262,7 +263,6 @@ export class BotiumBotmockExporter extends BaseExporter {
         } else {
             processedMessageId.push(currentMessage.message_id);
         }
-
 
         if (!currentMessage.next_message_ids || !currentMessage.next_message_ids.length) {
             log.nodeTerminatedReason = 'No more messages';
@@ -332,7 +332,7 @@ export class BotiumBotmockExporter extends BaseExporter {
             const decisions = logs.filter(log => log.connectionBranchCount && log.connectionBranchCount > 1).map(log => (log.connectionBranchIndex || 0) + 1)
 
             const convoGeneratedName = sanitize(resources.project.name) + (decisions.length ? `_${decisions.join('_')}` : '')
-            const convoGeneratedDescription = logs.flatMap(log => {
+            const convoGeneratedDescription = this.config.debug ? logs.flatMap(log => {
                 const result = []
                 if (log.type === 'node') {
                     result.push(`Node "${log.nodeMessageId}": ${log.nodeName} (${log.nodeMessageType})`)
@@ -351,7 +351,7 @@ export class BotiumBotmockExporter extends BaseExporter {
 
                     return result
                 }
-            }).join('\n')
+            }).join('\n') : undefined
             const convo: Botium.Convo = {
                 header: {
                     name: convoGeneratedName,
@@ -361,8 +361,6 @@ export class BotiumBotmockExporter extends BaseExporter {
             }
 
             const data = compiler.Decompile([convo], SCRIPTING_FORMAT_TXT, SCRIPTING_TYPE_CONVO)
-            var fs = require('fs');
-            fs.writeFileSync(`delme/${convoGeneratedName + this.#CONVO_POSTFIX}`, data);
 
             return {
                 filename: convoGeneratedName + this.#CONVO_POSTFIX,
@@ -379,8 +377,7 @@ export class BotiumBotmockExporter extends BaseExporter {
         intents.forEach((intentStruct: Botmock.Intent) => {
             const botmockUtterances: Botmock.Utterance[] =
                 (intentStruct.utterances['en'] && intentStruct.utterances['en'].length) ?
-                    // datastructure is not in synch with tpyescript. Typescript has no array in array
-                    (intentStruct.utterances['en'][0] as unknown as Botmock.Utterance[]) :
+                    intentStruct.utterances['en'] :
                     []
             resultUtteranceStructList.push({
                 name: this.#intentToUtteranceRef(intentStruct.name),
@@ -395,20 +392,15 @@ export class BotiumBotmockExporter extends BaseExporter {
             } = entry
 
             const data =  [name, ...utterances].join('\n')
-            var fs = require('fs');
-            fs.writeFileSync(`delme/${sanitize(name) + this.#UTTERANCES_POSTFIX}`, data);
 
             return {
-                filename: sanitize(name) + this.#CONVO_POSTFIX,
+                filename: sanitize(name) + this.#UTTERANCES_POSTFIX,
                 data
             }
         });
     };
 
     txtTransformation = (resources: Resources): DataTransformation<string> => {
-        let fs = require('fs');
-        fs.writeFileSync("test.json", JSON.stringify(resources));
-
         const intents = (resources.intents || []).reduce(
             (accumulator: Map<string, Botmock.Intent>, currentValue: Botmock.Intent) => {
                 accumulator.set(currentValue.id, currentValue);

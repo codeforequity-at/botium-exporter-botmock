@@ -5,6 +5,7 @@ import {sanitize} from "sanitize-filename-ts";
 
 const SCRIPTING_FORMAT_TXT = 'SCRIPTING_FORMAT_TXT'
 const SCRIPTING_TYPE_CONVO = 'SCRIPTING_TYPE_CONVO'
+// const SCRIPTING_TYPE_UTTERANCES = 'SCRIPTING_TYPE_UTTERANCES'
 
 import {Botium} from "./types";
 

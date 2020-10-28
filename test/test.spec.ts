@@ -10,6 +10,7 @@ import YAML from 'yaml'
 
 const INPUT_POSTFIX = '.input.yml'
 const OUTPUT_POSTFIX = '.expectedOutput.yml'
+const OUTPUT_DEBUG_POSTFIX = '.expectedOutput.debug.yml'
 const TEST_DIR = 'resources'
 
 describe('dynamic', () => {
@@ -17,23 +18,30 @@ describe('dynamic', () => {
         .filter((file: string) => file.endsWith(INPUT_POSTFIX))
         .map((file: string) => file.substring(0, file.length - INPUT_POSTFIX.length))
         .forEach((suiteName: string) => {
-            it(suiteName, async () => {
-
+            describe('dynamic', () => {
+            it('no debug', async () => {
                 const input = YAML.parse(fs.readFileSync(path.join(__dirname, TEST_DIR, suiteName + INPUT_POSTFIX)).toString())
+                // output looks better with yaml format. JSON displays filecontent in one row with '\n'
                 const expectedOutput = YAML.parse(fs.readFileSync(path.join(__dirname, TEST_DIR, suiteName + OUTPUT_POSTFIX)).toString())
                 const botiumBotmockExporter = new BotiumBotmockExporter({token: ''})
 
                 const output = botiumBotmockExporter.txtTransformation(input)
-                fs.writeFileSync(`delme/${suiteName}.json`, JSON.stringify(output));
 
                 assert.deepEqual(output, expectedOutput)
+            })
+            const pathDebug = path.join(__dirname, TEST_DIR, suiteName + OUTPUT_DEBUG_POSTFIX)
+            if (fs.existsSync(pathDebug)) {
+                it('debug', async () => {
+                    const input = YAML.parse(fs.readFileSync(path.join(__dirname, TEST_DIR, suiteName + INPUT_POSTFIX)).toString())
+                    // output looks better with yaml format. JSON displays filecontent in one row with '\n'
+                    const expectedOutput = YAML.parse(fs.readFileSync(pathDebug).toString())
+                    const botiumBotmockExporter = new BotiumBotmockExporter({token: '', debug: true})
 
-                // for (const key of Object.keys(output)) {
-                //     // JSON.parse + JSON.stringify: we are not able to store undefined in a json file.
-                //     // So we are removing from output too
-                //     // fs.writeFileSync('delme\\' + key + '.json', JSON.stringify(output[key]), 'utf8')
-                //     assert.deepEqual(JSON.parse(JSON.stringify(output[key])), expectedOutput[key], `The field ${key} does not match`)
-                // }
+                    const output = botiumBotmockExporter.txtTransformation(input)
+
+                    assert.deepEqual(output, expectedOutput)
+                })
+            }
             })
         })
 })

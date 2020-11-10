@@ -1,6 +1,6 @@
-# Botmock Dialogflow Export
+# Botmock Botium Export
 
-Node.js project for importing [Botmock](https://botmock.com) projects in [Botium](https://botium.atlassian.net/wiki/spaces/BOTIUM/overview)
+[Botmock](https://botmock.com) Exporter to [Botium Text Format](https://botium-docs.readthedocs.io/en/latest/05_botiumscript/index.html#composing-in-text-files)
 
 > **Note**: This exporter is experimental, not all features of Botmock, and Botium are supported.
 
@@ -25,10 +25,6 @@ Botmock features not yet supported:
 - Alternative bot replies
 - Full support for variables. (now in bot messages Botmock variables are replaced by Botium variables.)
 
-The output of this exporter are [text files supported by Botium](https://botium.atlassian.net/wiki/spaces/BOTIUM/overview) (*.convo.txt, *.utterances.txt).
-
-> **Note**: If you are using Botium Box, then it is easier to compress the result to zip, and import it as one file.
-
 ### Usage
 
 > **Note**: prerequisites
@@ -41,3 +37,8 @@ Running the following commands should allow you to generate restorable content f
 - `npm install`
 - `mv ./sample.env ./.env` and edit `.env` to contain your token and project ids
 - `npm start`
+
+The exported Botium Text Format can be used with all Botium Stack components:
+  * [Botium CLI](https://github.com/codeforequity-at/botium-cli/)
+  * [Botium Bindings](https://github.com/codeforequity-at/botium-bindings/)
+  * [Botium Box](https://www.botium.at)

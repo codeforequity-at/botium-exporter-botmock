@@ -4,11 +4,16 @@
   "description": "",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node src/BotiumBotmockExportMain.ts",
+    "start": "ts-node src/index.ts",
     "test": "env mocha -r ts-node/register 'test/**/*.spec.ts'"
   },
+  "keywords": [
+    "botmock",
+    "botium",
+    "nodejs"
+  ],
   "dependencies": {
-    "@botmock/export": "^0.21.0",
+    "@botmock/export": "^0.22.2",
     "@types/node": "13.13.12",
     "botium-core": "^1.9.9",
     "dotenv": "8.2.0",

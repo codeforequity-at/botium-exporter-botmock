@@ -59,8 +59,11 @@ export class BotiumBotmockExporter extends BaseExporter {
         return obj[key[0]];
     };
 
-    #getMessages = (payload: any, componentType: string): Botmock.Block[] => {
-        return (this.#getFallbackSafe(this.#getFallbackSafe(payload, 'en'), 'generic')?.blocks || []).filter((block: Botmock.Block) => block.component_type === componentType)
+    #getBlocks = (message: Botmock.Message, componentType: string): Botmock.Block[] => {
+        const allBlock = (this.#getFallbackSafe(this.#getFallbackSafe(message.payload, 'en'), 'generic')?.blocks || []).filter((block: Botmock.Block) => block.component_type === componentType) as Botmock.Block[]
+
+        // A node can contain the text messages of subnodes. Its better to filter them out.
+        return allBlock.filter(block => block.id === message.message_id)
     }
 
     #intentToUtteranceRef = (intent: string): string => {
@@ -103,6 +106,7 @@ export class BotiumBotmockExporter extends BaseExporter {
         messageID: string,
         messages: Map<string, Botmock.Message>,
         results: ResultEntry[],
+        intent: string = '',
         botiumConvoSteps: Botium.ConvoStep[] = [],
         processedMessageId: string[] = [],
         logs: Log[] = []
@@ -122,42 +126,49 @@ export class BotiumBotmockExporter extends BaseExporter {
         let messageTypeSupported = true;
 
         if (!currentMessage.is_root) {
+            const botiumConvoStepBot = {
+                sender: 'bot'
+            } as Botium.ConvoStep
+            const addAsserter = (step: Botium.ConvoStep, asserter: Botium.Asserter ) => {
+                if (step.asserters) {
+                    step.asserters.push(asserter)
+                } else {
+                    step.asserters = [asserter]
+                }
+                return step
+            }
+            if (intent) {
+                addAsserter(botiumConvoStepBot,{
+                    name: 'INTENT',
+                    args: [intent]
+                })
+            }
             switch (currentMessage.message_type) {
                 case 'image': {
-                    const media = this.#getMessages(currentMessage.payload, 'image').filter((block) => block.image_url).map(block => (block.image_url)) as string[];
+                    const media = this.#getBlocks(currentMessage, 'image').filter((block) => block.image_url).map(block => (block.image_url)) as string[];
 
                     if (media.length) {
-                        botiumConvoSteps.push({
-                            sender: 'bot',
-                            asserters: [
-                                {
-                                    name: 'MEDIA',
-                                    args: media
-                                }
-                            ]
-                        })
+                        botiumConvoSteps.push(addAsserter(botiumConvoStepBot, {
+                            name: 'MEDIA',
+                            args: media
+                        }))
                     }
                     break;
                 }
                 case 'button': {
                     const buttons: string[] = [];
 
-                    for (const block of this.#getMessages(currentMessage.payload, 'button')) {
+                    for (const block of this.#getBlocks(currentMessage, 'button')) {
                         (block.buttons || []).filter((button: any) => button.title).forEach((button: any) => {
                             buttons.push(button.title)
                         })
                     }
 
                     if (buttons.length) {
-                        botiumConvoSteps.push({
-                            sender: 'bot',
-                            asserters: [
-                                {
-                                    name: 'BUTTONS',
-                                    args: buttons
-                                }
-                            ]
-                        })
+                        botiumConvoSteps.push(addAsserter(botiumConvoStepBot, {
+                            name: 'BUTTONS',
+                            args: buttons
+                        }))
                     }
                     break;
                 }
@@ -165,7 +176,7 @@ export class BotiumBotmockExporter extends BaseExporter {
                     const cards: string[] = [];
                     const buttons: string[] = [];
                     const media: string[] = [];
-                    for (const block of this.#getMessages(currentMessage.payload, 'generic')) {
+                    for (const block of this.#getBlocks(currentMessage, 'generic')) {
                         for (const e of (block.elements || [])) {
                             cards.push(e.title || e.subtitle);
                             if (e.image_url) {
@@ -177,40 +188,30 @@ export class BotiumBotmockExporter extends BaseExporter {
                         }
                     }
 
-                    const msgStruct = {
-                        sender: 'bot',
-                        asserters: [] as Botium.Asserter[]
-                    };
                     if (cards.length) {
-                        msgStruct.asserters.push(
-                            {
-                                name: 'CARDS',
-                                args: cards
-                            }
-                        )
+                        addAsserter(botiumConvoStepBot, {
+                            name: 'CARDS',
+                            args: cards
+                        })
                     }
                     if (media.length) {
-                        msgStruct.asserters.push(
-                            {
-                                name: 'MEDIA',
-                                args: media
-                            }
-                        )
+                        addAsserter(botiumConvoStepBot, {
+                            name: 'MEDIA',
+                            args: media
+                        })
                     }
                     if (buttons.length) {
-                        msgStruct.asserters.push(
-                            {
-                                name: 'BUTTONS',
-                                args: buttons
-                            }
-                        )
+                        addAsserter(botiumConvoStepBot, {
+                            name: 'BUTTONS',
+                            args: buttons
+                        })
                     }
-                    botiumConvoSteps.push(msgStruct)
+                    botiumConvoSteps.push(botiumConvoStepBot)
                     break;
                 }
                 case 'user_reply': {
                     const messages = [];
-                    for (const block of this.#getMessages(currentMessage.payload, 'user_reply').filter(block => block.text)) {
+                    for (const block of this.#getBlocks(currentMessage, 'user_reply').filter(block => block.text)) {
                         messages.push(block.text);
                     }
 
@@ -224,20 +225,21 @@ export class BotiumBotmockExporter extends BaseExporter {
                 }
                 case 'text': {
                     const botMessages: string[] = [];
-                    for (const block of this.#getMessages(currentMessage.payload, 'text').filter(block => block.text)) {
+                    for (const block of this.#getBlocks(currentMessage, 'text').filter(block => block.text)) {
                         botMessages.push(block.text as string);
                     }
 
                     if (botMessages.length) {
-                        botiumConvoSteps.push({
-                            sender: 'bot',
-                            // TODO maybe we could variable definitions here
-                            messageText: botMessages.map(m => this.#replaceVariableCharacterInTextNoVars(m)).join('/n')
-                        })
+                        // TODO maybe we could variable definitions here, using the other replaceXXX function
+                        botiumConvoStepBot.messageText = botMessages.map(m => this.#replaceVariableCharacterInTextNoVars(m)).join('/n')
+                        botiumConvoSteps.push(botiumConvoStepBot)
                     }
                     break;
                 }
                 default:
+                    if (intent) {
+                        botiumConvoSteps.push(botiumConvoStepBot)
+                    }
                     messageTypeSupported = false;
 
             }
@@ -286,22 +288,18 @@ export class BotiumBotmockExporter extends BaseExporter {
             let processedMessageIdCloned = [...processedMessageId];
             let logsCloned = [...logs, log];
 
-            if (nextMessage.intent && nextMessage.intent.label) {
+            let intent = nextMessage.intent && nextMessage.intent.label
+            if (intent) {
                 botiumConvoStepsCloned.push({
                     sender: 'me',
-                    messageText: this.#intentToUtteranceRef(nextMessage.intent.label),
-                    asserters: [
-                        {
-                            name: 'INTENT',
-                            args: [nextMessage.intent.label]
-                        }
-                    ]
+                    messageText: this.#intentToUtteranceRef(intent)
                 })
             }
             this.#getConversationsRecursive(
                 nextMessage.message_id,
                 messages,
                 results,
+                intent,
                 botiumConvoStepsCloned,
                 processedMessageIdCloned,
                 logsCloned

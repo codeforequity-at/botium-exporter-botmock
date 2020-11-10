@@ -1,0 +1,199 @@
+---
+- filename: Botium Exporter Test_1.convo.txt
+  data: |
+    Botium Exporter Test_1
+
+    #me
+    UTT_INTENT_AUDIO
+
+    #bot
+    Your text here
+    INTENT INTENT_AUDIO
+- filename: Botium Exporter Test_2.convo.txt
+  data: |
+    Botium Exporter Test_2
+
+    #me
+    UTT_INTENT_IMAGE
+
+    #bot
+    INTENT INTENT_IMAGE
+    MEDIA https://botmock.s3.amazonaws.com/1596634632.png
+- filename: Botium Exporter Test_3.convo.txt
+  data: |
+    Botium Exporter Test_3
+
+    #me
+    UTT_INTENT_BUTTON
+
+    #bot
+    Choose
+    INTENT INTENT_BUTTON
+    BUTTONS BUTTON1|BUTTON2
+- filename: Botium Exporter Test_4.convo.txt
+  data: |
+    Botium Exporter Test_4
+
+    #me
+    UTT_INTENT_LOCATION
+
+    #bot
+    INTENT INTENT_LOCATION
+- filename: Botium Exporter Test_5.convo.txt
+  data: |
+    Botium Exporter Test_5
+
+    #me
+    UTT_INTENT_WEBVIEW
+
+    #bot
+    INTENT INTENT_WEBVIEW
+- filename: Botium Exporter Test_6.convo.txt
+  data: |
+    Botium Exporter Test_6
+
+    #me
+    UTT_INTENT_CAROUSEL
+
+    #bot
+    INTENT INTENT_CAROUSEL
+    CARDS Clothing|Accessories
+    MEDIA https://botmock.s3.amazonaws.com/1596624373.png|https://botmock.s3.amazonaws.com/1596624440.png
+    BUTTONS See this deal
+- filename: Botium Exporter Test_7.convo.txt
+  data: |
+    Botium Exporter Test_7
+
+    #me
+    UTT_INTENT_ALTERNATIVES
+
+    #bot
+    First text
+    INTENT INTENT_ALTERNATIVES
+- filename: Botium Exporter Test_8.convo.txt
+  data: |
+    Botium Exporter Test_8
+
+    #me
+    UTT_INTENT_LOOP
+
+    #bot
+    Here are one looping option you can choose:
+    INTENT INTENT_LOOP
+    BUTTONS Show buttons again
+
+    #me
+    Show buttons again
+
+    #bot
+    Here are one looping option you can choose:
+    BUTTONS Show buttons again
+- filename: Botium Exporter Test_9.convo.txt
+  data: |
+    Botium Exporter Test_9
+
+    #me
+    UTT_INTENT_VARIABLE
+
+    #bot
+    Red or blue pill?
+    INTENT INTENT_VARIABLE
+
+    #me
+    UTT_INTENT_PILL_TYPE
+
+    #bot
+    You have choosen $VARIABLE_PILL pill
+    INTENT INTENT_PILL_TYPE
+- filename: Botium Exporter Test_10_1.convo.txt
+  data: |
+    Botium Exporter Test_10_1
+
+    #me
+    UTT_INTENT_BRANCHING_BY_BOT
+
+    #bot
+    BotMessage1
+    INTENT INTENT_BRANCHING_BY_BOT
+
+    #bot
+    Botmessage 2/1
+- filename: Botium Exporter Test_10_2.convo.txt
+  data: |
+    Botium Exporter Test_10_2
+
+    #me
+    UTT_INTENT_BRANCHING_BY_BOT
+
+    #bot
+    BotMessage1
+    INTENT INTENT_BRANCHING_BY_BOT
+
+    #bot
+    Botmessage 2/2
+- filename: Botium Exporter Test_11.convo.txt
+  data: |
+    Botium Exporter Test_11
+
+    #me
+    UTT_INTENT_TEST
+
+    #bot
+    test
+    INTENT INTENT_TEST
+- filename: UTT_INTENT_ALTERNATIVES.utterances.txt
+  data: |-
+    UTT_INTENT_ALTERNATIVES
+    alternatives
+- filename: UTT_INTENT_AUDIO.utterances.txt
+  data: |
+    UTT_INTENT_AUDIO
+    audio
+- filename: UTT_INTENT_BRANCHING_BY_BOT.utterances.txt
+  data: |-
+    UTT_INTENT_BRANCHING_BY_BOT
+    branching by bot
+    branching
+- filename: UTT_INTENT_BUTTON.utterances.txt
+  data: |-
+    UTT_INTENT_BUTTON
+    button
+- filename: UTT_INTENT_CAROUSEL.utterances.txt
+  data: |-
+    UTT_INTENT_CAROUSEL
+    carousel
+- filename: UTT_INTENT_IMAGE.utterances.txt
+  data: |-
+    UTT_INTENT_IMAGE
+    image
+    Image
+    pic
+    picture
+- filename: UTT_INTENT_LOCATION.utterances.txt
+  data: |-
+    UTT_INTENT_LOCATION
+    location
+- filename: UTT_INTENT_LOOP.utterances.txt
+  data: |-
+    UTT_INTENT_LOOP
+    loop
+- filename: UTT_INTENT_NOT_USED.utterances.txt
+  data: |-
+    UTT_INTENT_NOT_USED
+    not used value
+- filename: UTT_INTENT_PILL_TYPE.utterances.txt
+  data: |-
+    UTT_INTENT_PILL_TYPE
+    $VARIABLE_PILL
+- filename: UTT_INTENT_TEST.utterances.txt
+  data: |-
+    UTT_INTENT_TEST
+    test
+- filename: UTT_INTENT_VARIABLE.utterances.txt
+  data: |-
+    UTT_INTENT_VARIABLE
+    variable
+- filename: UTT_INTENT_WEBVIEW.utterances.txt
+  data: |-
+    UTT_INTENT_WEBVIEW
+    webview

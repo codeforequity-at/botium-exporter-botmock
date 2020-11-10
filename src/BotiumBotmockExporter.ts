@@ -59,11 +59,14 @@ export class BotiumBotmockExporter extends BaseExporter {
         return obj[key[0]];
     };
 
-    #getBlocks = (message: Botmock.Message, componentType: string): Botmock.Block[] => {
-        const allBlock = (this.#getFallbackSafe(this.#getFallbackSafe(message.payload, 'en'), 'generic')?.blocks || []).filter((block: Botmock.Block) => block.component_type === componentType) as Botmock.Block[]
+    #getBlocks = (message: Botmock.Message, componentType?: string): Botmock.Block[] => {
+        let allBlock = (this.#getFallbackSafe(this.#getFallbackSafe(message.payload, 'en'), 'generic')?.blocks || [])
+        if (componentType) {
+            allBlock = allBlock.filter((block: Botmock.Block) => block.component_type === componentType) as Botmock.Block[]
+        }
 
         // A node can contain the text messages of subnodes. Its better to filter them out.
-        return allBlock.filter(block => block.id === message.message_id)
+        return allBlock.filter((block: Botmock.Block) => block.id === message.message_id)
     }
 
     #intentToUtteranceRef = (intent: string): string => {
@@ -126,8 +129,11 @@ export class BotiumBotmockExporter extends BaseExporter {
         let messageTypeSupported = true;
 
         if (!currentMessage.is_root) {
+            // is it the right way to extract text?
+            const block = this.#getBlocks(currentMessage)[0];
             const botiumConvoStepBot = {
-                sender: 'bot'
+                sender: 'bot',
+                messageText: block.text
             } as Botium.ConvoStep
             const addAsserter = (step: Botium.ConvoStep, asserter: Botium.Asserter ) => {
                 if (step.asserters) {

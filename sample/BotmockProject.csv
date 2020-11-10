@@ -1,0 +1,14 @@
+id,content_type,nodeName,text,show_for,buttons.0.title,buttons.0.payload,audio_file,ssml,workflow_column_id,assigned_to,component_type,elements.0.title,elements.0.image_url,elements.0.item_url,elements.0.subtitle,elements.0.buttons.0.title,elements.0.buttons.0.payload,elements.1.title,elements.1.image_url,image_url,is_user_reply,buttons.0.selected,buttons.1.title,buttons.1.payload,address,title,workflow_index,image,height,sharing,alternate_replies.0.body
+c38a0990-d703-11ea-8f47-834576e545ab,text,"Starting Point","Starting point",2000,,,,,,,,,,,,,,,,,,,,,,,,,
+02222e22-25ce-4b4a-a293-7d08c0f53e8f,button,Button,"Here are one looping option you can choose:",2000,"Show buttons again","Show buttons again",,,0,button,,,,,,,,,,,,,,,,,,,
+4b53a416-6182-4128-bb07-95a06cf92e57,generic,"Carousel / Card",,2000,,,,,0,generic,Clothing,https://botmock.s3.amazonaws.com/1596624373.png,http://botmock.com,"Subtitle goes here","See this deal",PAyload,Accessories,https://botmock.s3.amazonaws.com/1596624440.png,,,,,,,,,,,
+4da3f21f-b828-42b0-b99a-b8f43882a8d3,user_reply,"User Says","Show buttons again",2000,,,,,0,user_reply,,,,,,,,,,,,,,,,,,,
+d99da98f-3750-48c6-8b3d-b10a2bb031df,text,"Bot Says","Your text here",2000,,,https://botmock.s3.amazonaws.com/1596633611.mp3,,0,text,,,,,,,,,,,,,,,,,,,
+7db233d4-d715-404a-968f-046fd739066f,image,Image,,2000,,,,,0,image,,,,,,,,,https://botmock.s3.amazonaws.com/1596634632.png,,,,,,,,,,
+7867d134-3ae8-4712-bdbe-40ab0b06ea3a,button,Button,Choose,2000,BUTTON1,"Payload button1",,,0,button,,,,,,,,,,,,BUTTON2,"payload button2",,,,,,
+06c9b7f5-ae4a-40f6-8cb0-d15cad45d159,location,Location,,2000,,,,,,,,,,,,,,,,,,,,"430 Sweetflag St, Ottawa, ON","Botmock Office",,,,
+a8687213-71a9-40ed-abdc-718bbfa23588,webview,"Web View",,2000,,,,,0,webview,,,,,,,,,,,,,,,"Webview Title",https://botmock.s3.amazonaws.com/1596635359.png,full,Yes,
+2e1a7bec-ccb0-4690-93f8-57c68b760872,text,"Bot Says","First text",2000,,,,,0,text,,,,,,,,,,,,,,,,,,,"Second text"
+959dbfc0-f223-4c6a-bf9e-ec92041a31e5,text,"Bot Says","Red or blue pill?",2000,,,,,0,text,,,,,,,,,,,,,,,,,,,
+3b517bd5-0324-429c-b14b-f3fc3256ce92,text,"Bot Says","You have choosen %VARIABLE_PILL% pill",2000,,,,,0,text,,,,,,,,,,,,,,,,,,,
+348bd70f-1abb-4c75-b864-1a8c5acf57ac,text,"Bot Says",test,2000,,,,,0,text,,,,,,,,,,,,,,,,,,,

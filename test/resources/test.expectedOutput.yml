@@ -27,6 +27,7 @@
     UTT_INTENT_BUTTON
 
     #bot
+    Choose
     INTENT INTENT_BUTTON
     BUTTONS BUTTON1|BUTTON2
 - filename: Botium Exporter Test_4.convo.txt
@@ -77,6 +78,7 @@
     UTT_INTENT_LOOP
 
     #bot
+    Here are one looping option you can choose:
     INTENT INTENT_LOOP
     BUTTONS Show buttons again
 
@@ -84,6 +86,7 @@
     Show buttons again
 
     #bot
+    Here are one looping option you can choose:
     BUTTONS Show buttons again
 - filename: Botium Exporter Test_9.convo.txt
   data: |

@@ -1,11 +1,13 @@
 {
-  "name": "botium-botmock-export",
-  "version": "0.0.1",
+  "name": "botium-exporter-botmock",
+  "version": "0.0.2",
   "description": "Botmock Botium Export",
   "main": "dist/src/index.js",
   "module": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/codeforequity-at/botium-exporter-botmock.git"

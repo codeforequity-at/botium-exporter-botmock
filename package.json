@@ -1,7 +1,21 @@
 {
   "name": "botium-botmock-export",
   "version": "0.0.1",
-  "description": "",
+  "description": "Botmock Botium Export",
+  "main": "dist/src/index.js",
+  "module": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": ["dist/**/*"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeforequity-at/botium-exporter-botmock.git"
+  },
+  "author": "Botium GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codeforequity-at/botium-exporter-botmock/issues"
+  },
+  "homepage": "https://www.botium.ai",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/index.ts",

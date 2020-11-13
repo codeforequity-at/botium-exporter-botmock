@@ -1,5 +1,13 @@
 # Botmock Botium Export
 
+[![NPM](https://nodei.co/npm/botium-exporter-botmock.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/botium-exporter-botmock/)
+
+[![Codeship Status for codeforequity-at/botium-exporter-botmock](https://app.codeship.com/projects/f6e5bea3-6f81-49bd-ab62-5ec299fff79f/status?branch=master)](https://app.codeship.com/projects/418083)
+[![npm version](https://badge.fury.io/js/botium-exporter-botmock.svg)](https://badge.fury.io/js/botium-exporter-botmock)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)]()
+[![pullrequests](https://img.shields.io/badge/PR-welcome-green.svg)]()
+[![awesome](https://img.shields.io/badge/Awesome-for%20sure!-green.svg)]()
+
 [Botmock](https://botmock.com) Exporter to [Botium Text Format](https://botium-docs.readthedocs.io/en/latest/05_botiumscript/index.html#composing-in-text-files)
 
 > **Note**: This exporter is experimental, not all features of Botmock, and Botium are supported.

@@ -40,8 +40,8 @@ Botmock features not yet supported:
 
 Running the following commands should allow you to generate restorable content from your Botmock project.
 
-- `git clone git@github.com:Botmock/botium-botmock-export.git`
-- `cd botium-botmock-export`
+- `git clone git@github.com:codeforequity-at/botium-exporter-botmock.git`
+- `cd botium-exporter-botmock`
 - `npm install`
 - `mv ./sample.env ./.env` and edit `.env` to contain your token and project ids
 - `npm start`
